@@ -14462,6 +14462,12 @@ public final class Settings {
          * @hide
          */
         public static final String CLEARTEXT_NETWORK_POLICY = "cleartext_network_policy";
+
+        /**
+         * Whether to scramble a pin unlock layout
+         * @hide
+         */
+        public static final String LOCKSCREEN_PIN_SCRAMBLE_LAYOUT = "lockscreen_scramble_pin_layout";
     }
 
     /**
