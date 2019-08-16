@@ -9021,6 +9021,15 @@ public final class Settings {
         private static final Validator PANIC_IN_POWER_MENU_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Whether tethering is allowed to use VPN upstreams
+         * 0 = false, 1 = true
+         * @hide
+         */
+        public static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
+
+        private static final Validator TETHERING_ALLOW_VPN_UPSTREAMS_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -9159,7 +9168,8 @@ public final class Settings {
             AWARE_TAP_PAUSE_TOUCH_COUNT,
             MICROG_DEFAULT_LOCATION_BACKENDS,
             MICROG_DEFAULT_GEOCODER_BACKENDS,
-            PANIC_IN_POWER_MENU
+            PANIC_IN_POWER_MENU,
+            TETHERING_ALLOW_VPN_UPSTREAMS
         };
 
         /**
@@ -9360,6 +9370,7 @@ public final class Settings {
             VALIDATORS.put(MICROG_DEFAULT_LOCATION_BACKENDS, MICROG_DEFAULT_BACKENDS_VALIDATOR);
             VALIDATORS.put(MICROG_DEFAULT_GEOCODER_BACKENDS, MICROG_DEFAULT_BACKENDS_VALIDATOR);
             VALIDATORS.put(PANIC_IN_POWER_MENU, PANIC_IN_POWER_MENU_VALIDATOR);
+            VALIDATORS.put(TETHERING_ALLOW_VPN_UPSTREAMS, TETHERING_ALLOW_VPN_UPSTREAMS_VALIDATOR);
         }
 
         /**
