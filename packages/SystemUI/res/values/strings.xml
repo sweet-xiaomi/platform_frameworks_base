@@ -2489,4 +2489,6 @@
     <!-- Notification content text when switching to a default launcher that supports gesture navigation [CHAR LIMIT=NONE] -->
     <string name="notification_content_gesture_nav_available">Go to Settings to update system navigation</string>
 
+    <string name="global_action_panic">Panic Trigger</string>
+
 </resources>
