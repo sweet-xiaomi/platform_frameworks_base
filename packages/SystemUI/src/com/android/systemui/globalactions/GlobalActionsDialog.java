@@ -241,7 +241,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private boolean mIsWaitingForEcmExit = false;
     private boolean mHasTelephony;
     private boolean mHasVibrator;
-    private boolean mHasPanicButton;
     private final boolean mShowSilentToggle;
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
     private final ScreenshotHelper mScreenshotHelper;
@@ -618,7 +617,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             addedKeys.add(GLOBAL_ACTION_KEY_EMERGENCY);
         }
 
-        mHasPanicButton = false;
         for (int i = 0; i < defaultActions.length; i++) {
             String actionKey = defaultActions[i];
             if (addedKeys.contains(actionKey)) {
@@ -667,8 +665,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
                             Settings.Secure.PANIC_IN_POWER_MENU, 0, getCurrentUser().id) != 0
                             && isPanicAvailable()) {
-                    mItems.add(new PanicAction());
-                    mHasPanicButton = true;
+                    addIfShouldShowAction(tempActions, new PanicAction());
                 }
             } else {
                 Log.e(TAG, "Invalid global action key " + actionKey);
