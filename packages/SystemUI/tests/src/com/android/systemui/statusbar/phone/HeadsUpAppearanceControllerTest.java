@@ -99,7 +99,6 @@ public class HeadsUpAppearanceControllerTest extends SysuiTestCase {
                 mHeadsUpStatusBarView,
                 new View(mContext),
                 mOperatorNameView,
-                new View(mContext),
                 new View(mContext));
         mHeadsUpAppearanceController.setAppearFraction(0.0f, 0.0f);
     }
@@ -177,7 +176,6 @@ public class HeadsUpAppearanceControllerTest extends SysuiTestCase {
                 mStackScrollerController,
                 mPanelView,
                 mHeadsUpStatusBarView,
-                new View(mContext),
                 new View(mContext),
                 new View(mContext),
                 new View(mContext));
