@@ -17361,7 +17361,6 @@ public class DevicePolicyManagerService extends BaseIDevicePolicyManager {
                         PROVISIONING_RESULT_SETTING_PROFILE_OWNER_FAILED,
                         "Error setting profile owner.");
             }
-            setUserSetupComplete(userInfo.id);
 
             startUser(userInfo.id, callerPackage);
             maybeMigrateAccount(
