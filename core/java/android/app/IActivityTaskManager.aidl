@@ -298,7 +298,7 @@ interface IActivityTaskManager {
      * a short predefined amount of time.
      */
     void registerRemoteAnimationForNextActivityStart(in String packageName,
-           in RemoteAnimationAdapter adapter);
+            in RemoteAnimationAdapter adapter, in IBinder launchCookie);
 
     /**
      * Registers remote animations for a display.
