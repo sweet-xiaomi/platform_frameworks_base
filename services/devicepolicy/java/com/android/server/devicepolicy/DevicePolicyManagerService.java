@@ -14733,7 +14733,8 @@ public class DevicePolicyManagerService extends BaseIDevicePolicyManager {
             // Clear restriction as user.
             final UserHandle parentUser = mUserManager.getProfileParent(UserHandle.of(userId));
             if (parentUser == null) {
-                throw new IllegalStateException(String.format("User %d is not a profile", userId));
+                throw new IllegalStateException(
+                        String.format("User %d is not a profile", userId));
             }
             if (!parentUser.isSystem()) {
                 throw new IllegalStateException(
@@ -14745,9 +14746,12 @@ public class DevicePolicyManagerService extends BaseIDevicePolicyManager {
             mUserManager.setUserRestriction(UserManager.DISALLOW_REMOVE_MANAGED_PROFILE,
                     isProfileOwnerOnOrganizationOwnedDevice,
                     parentUser);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_ADD_USER,
-                    isProfileOwnerOnOrganizationOwnedDevice,
-                    parentUser);
+            final String BELLIS_PACKAGE_NAME = "org.calyxos.bellis";
+            if (!BELLIS_PACKAGE_NAME.equals(who.getPackageName())) {
+                mUserManager.setUserRestriction(UserManager.DISALLOW_ADD_USER,
+                        isProfileOwnerOnOrganizationOwnedDevice,
+                        parentUser);
+            }
         });
 
         // setProfileOwnerOfOrganizationOwnedDevice will trigger writing of the profile owner
