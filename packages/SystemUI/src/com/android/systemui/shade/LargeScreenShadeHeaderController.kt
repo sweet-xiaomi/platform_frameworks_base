@@ -175,10 +175,9 @@ class LargeScreenShadeHeaderController @Inject constructor(
      */
     var shadeExpandedFraction = -1f
         set(value) {
-            if (field != value) {
+            if (visible && field != value) {
                 header.alpha = ShadeInterpolation.getContentAlpha(value)
                 field = value
-                updateVisibility()
             }
         }
 
@@ -325,9 +324,6 @@ class LargeScreenShadeHeaderController @Inject constructor(
                 .setDuration(duration)
                 .alpha(if (show) 0f else 1f)
                 .setInterpolator(if (show) Interpolators.ALPHA_OUT else Interpolators.ALPHA_IN)
-                .setUpdateListener {
-                    updateVisibility()
-                }
                 .start()
     }
 
@@ -411,7 +407,7 @@ class LargeScreenShadeHeaderController @Inject constructor(
     private fun updateVisibility() {
         val visibility = if (!largeScreenActive && !combinedHeaders || qsDisabled) {
             View.GONE
-        } else if (qsVisible && header.alpha > 0f) {
+        } else if (qsVisible) {
             View.VISIBLE
         } else {
             View.INVISIBLE
