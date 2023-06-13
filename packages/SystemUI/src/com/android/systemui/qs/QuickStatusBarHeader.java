@@ -95,7 +95,6 @@ public class QuickStatusBarHeader extends FrameLayout {
     private StatusBarContentInsetsProvider mInsetsProvider;
 
     private int mRoundedCornerPadding = 0;
-    private int mStatusBarPaddingTop;
     private int mWaterfallTopInset;
     private int mCutOutPaddingLeft;
     private int mCutOutPaddingRight;
@@ -257,20 +256,19 @@ public class QuickStatusBarHeader extends FrameLayout {
         mRoundedCornerPadding = resources.getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
 
-        int statusBarHeight = SystemBarUtils.getStatusBarHeight(mContext);
+        int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
 
-        mStatusBarPaddingTop = resources.getDimensionPixelSize(
-                R.dimen.status_bar_padding_top);
-
-        mDatePrivacyView.getLayoutParams().height = statusBarHeight;
+        mDatePrivacyView.getLayoutParams().height =
+                Math.max(qsOffsetHeight, mDatePrivacyView.getMinimumHeight());
         mDatePrivacyView.setLayoutParams(mDatePrivacyView.getLayoutParams());
 
-        mStatusIconsView.getLayoutParams().height = statusBarHeight;
+        mStatusIconsView.getLayoutParams().height =
+                Math.max(qsOffsetHeight, mStatusIconsView.getMinimumHeight());
         mStatusIconsView.setLayoutParams(mStatusIconsView.getLayoutParams());
 
         ViewGroup.LayoutParams lp = getLayoutParams();
         if (mQsDisabled) {
-            lp.height = mStatusIconsView.getLayoutParams().height - mWaterfallTopInset;
+            lp.height = mStatusIconsView.getLayoutParams().height;
         } else {
             lp.height = WRAP_CONTENT;
         }
@@ -294,7 +292,7 @@ public class QuickStatusBarHeader extends FrameLayout {
             qqsLP.topMargin = mContext.getResources()
                     .getDimensionPixelSize(R.dimen.qqs_layout_margin_top);
         } else if (!mUseCombinedQSHeader) {
-            qqsLP.topMargin = SystemBarUtils.getQuickQsOffsetHeight(mContext);
+            qqsLP.topMargin = qsOffsetHeight;
         } else {
             qqsLP.topMargin = mContext.getResources()
                     .getDimensionPixelSize(R.dimen.large_screen_shade_header_min_height);
@@ -543,11 +541,11 @@ public class QuickStatusBarHeader extends FrameLayout {
         }
 
         mDatePrivacyView.setPadding(paddingLeft,
-                mStatusBarPaddingTop,
+                mWaterfallTopInset,
                 paddingRight,
                 0);
         mStatusIconsView.setPadding(paddingLeft,
-                mStatusBarPaddingTop,
+                mWaterfallTopInset,
                 paddingRight,
                 0);
     }
