@@ -223,7 +223,6 @@ class DeviceEntryFaceAuthRepositoryTest : SysuiTestCase() {
             bypassControllerOverride,
             testScope.backgroundScope,
             testDispatcher,
-            testDispatcher,
             sessionTracker,
             uiEventLogger,
             FaceAuthenticationLogger(logcatLogBuffer("DeviceEntryFaceAuthRepositoryLog")),

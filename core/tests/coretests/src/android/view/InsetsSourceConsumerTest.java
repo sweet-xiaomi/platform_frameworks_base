@@ -219,10 +219,10 @@ public class InsetsSourceConsumerTest {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
             InsetsState state = new InsetsState();
             ViewRootInsetsControllerHost host = new ViewRootInsetsControllerHost(mViewRoot);
-            InsetsController insetsController = new InsetsController(host, (ic, id, type) -> {
-                if (type == ime()) {
+            InsetsController insetsController = new InsetsController(host, (controller, source) -> {
+                if (source.getType() == ime()) {
                     return new InsetsSourceConsumer(ID_IME, ime(), state,
-                            () -> mMockTransaction, ic) {
+                            () -> mMockTransaction, controller) {
                         @Override
                         public int requestShow(boolean fromController,
                                 ImeTracker.Token statsToken) {
@@ -230,9 +230,11 @@ public class InsetsSourceConsumerTest {
                         }
                     };
                 }
-                return new InsetsSourceConsumer(id, type, ic.getState(), Transaction::new, ic);
+                return new InsetsSourceConsumer(source.getId(), source.getType(),
+                        controller.getState(), Transaction::new, controller);
             }, host.getHandler());
-            InsetsSourceConsumer imeConsumer = insetsController.getSourceConsumer(ID_IME, ime());
+            InsetsSource imeSource = new InsetsSource(ID_IME, ime());
+            InsetsSourceConsumer imeConsumer = insetsController.getSourceConsumer(imeSource);
 
             // Initial IME insets source control with its leash.
             imeConsumer.setControl(new InsetsSourceControl(ID_IME, ime(), mLeash,
