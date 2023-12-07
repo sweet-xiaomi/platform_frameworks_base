@@ -21,16 +21,16 @@ import android.os.PowerManager
 import android.view.GestureDetector
 import android.view.MotionEvent
 import com.android.systemui.dagger.qualifiers.Main
+import com.android.systemui.dagger.SysUISingleton
 import com.android.systemui.plugins.FalsingManager
 import com.android.systemui.plugins.statusbar.StatusBarStateController
-import com.android.systemui.statusbar.phone.dagger.CentralSurfacesComponent
 import com.android.systemui.tuner.TunerService
 import com.android.systemui.tuner.TunerService.Tunable
 import lineageos.providers.LineageSettings
 
 import javax.inject.Inject
 
-@CentralSurfacesComponent.CentralSurfacesScope
+@SysUISingleton
 class QQSGestureListener @Inject constructor(
         private val falsingManager: FalsingManager,
         private val powerManager: PowerManager,
