@@ -73,25 +73,15 @@ object ActionIntentCreator {
      *   available.
      */
     fun createEditIntent(uri: Uri, context: Context): Intent {
-        return createEditOrViewIntent(uri, context, Intent(Intent.ACTION_EDIT))
-    }
+        val editIntent = Intent(Intent.ACTION_EDIT)
 
-    /**
-     * @return an ACTION_VIEW intent for the given URI, directed to config_screenshotEditor if
-     *   available.
-     */
-    fun createViewIntent(uri: Uri, context: Context): Intent {
-        return createEditOrViewIntent(uri, context, Intent(Intent.ACTION_VIEW))
-    }
-
-    private fun createEditOrViewIntent(uri: Uri, context: Context, intent: Intent): Intent {
         context.getString(R.string.config_screenshotEditor)?.let {
             if (it.isNotEmpty()) {
-                intent.component = ComponentName.unflattenFromString(it)
+                editIntent.component = ComponentName.unflattenFromString(it)
             }
         }
 
-        return intent
+        return editIntent
             .setDataAndType(uri, "image/png")
             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
